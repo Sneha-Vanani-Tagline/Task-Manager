@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import os
+from datetime import timedelta
 
 load_dotenv()
 
@@ -39,6 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'task',
     'accounts',
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -132,3 +135,16 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+REST_FRAMEWORK = {
+    # authentication classes must be in list or tuple
+    'DEFAULT_AUTHENTICATION_CLASSES' : ['rest_framework_simplejwt.authentication.JWTAuthentication'],
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME" : timedelta(hours=1),
+    "REFRESH_TOKEN_LIFETIME" : timedelta(days=15),
+    "ROTATE_REFRESH_TOKENS" : True,
+    "BLACKLIST_AFTER_ROTATION" : True,
+}

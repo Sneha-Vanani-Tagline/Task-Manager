@@ -8,6 +8,7 @@ class Users(AbstractUser):
         Manager = 'manager', 'Manager'
         Employee = 'employee', 'Employee'
     
+    email = models.EmailField(unique=True)      # overide email, to apply unique contraint
     role = models.CharField(max_length=20,choices=UserOption)
     
 
